@@ -1,4 +1,6 @@
 const city = "Владикавказ";
 const degrees = "22";
-console.log("'My city is ' + city");
-console.log("'Degrees in my city is ' + degrees")
+console.log('My city is ' + city); //Здесь я просто банально вывел нудный текст с переменной, в которой хранится нужное мне значение
+console.log('Degrees in my city is ' + degrees) //Здесь я сделал то же самое, что и выше
+
+console.log(2 + 2 * 2); //сложение двух чисел и произведение суммы на третье
