@@ -1,1 +1,0 @@
-console.log("Hello, World! It's a script-1.js!");
