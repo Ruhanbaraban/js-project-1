@@ -1,6 +1,38 @@
-const city = "Владикавказ";
-const degrees = "22";
-console.log('My city is ' + city); //Здесь я просто банально вывел нудный текст с переменной, в которой хранится нужное мне значение
-console.log('Degrees in my city is ' + degrees) //Здесь я сделал то же самое, что и выше
 
-console.log(2 + 2 * 2); //сложение двух чисел и произведение суммы на третье
+const a = 10;
+const b = 13;
+const c = 8;
+
+function remainderCalc(){
+    if(a % 2 !== 0){
+        console.log("This number is not even");
+    } else{
+        console.log("This number is even");
+    }
+
+    if(b % 2 !== 0){
+        console.log("This number is not even");
+    } else{
+        console.log("This number is even");
+    }
+
+    if(c % 2 !== 0){
+        console.log("This number is not even");
+    } else{
+        console.log("This number is even");
+    }
+}
+
+remainderCalc()
+
+function identification(name){
+    name = "";
+
+    if(name == undefined || name == null || name == ""){
+        console.log("Hello, Guest!")
+    } else{
+        console.log("Hello, " + name);
+    }
+}
+
+identification();
