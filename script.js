@@ -14,15 +14,21 @@ function whileFunc(){
     }
 }
 
+function check(num){
+    for(let i = 2; i < num; i++){
+        if(num % i === 0){
+            return false;
+        }
+    }
+    return num !== 1;
+}
 
-
-
-let number = 2;
-
-for(let i = 2; i <= 100; i++){
-    if(i % number === 0){
-        console.log("")
-    } else if(i % i === 0 && i % 1 === 0){
-        console.log(i)
+function print(max){
+    for(let i = 2; i <= max; i++){
+        if(check(i)){
+            console.log(i)
+        }
     }
 }
+
+print(100)
