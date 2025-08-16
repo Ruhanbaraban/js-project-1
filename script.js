@@ -1,34 +1,21 @@
-let i = 0;
+const message = "JavaScript is fun!";
+console.log(message.includes("fun"));
 
-
-function forFunc(){
-    for(let i = 0; i <= 10; i++){
-        console.log(i)
-    }
+let a = null;
+if(!a){
+    console.log("It is a falsy");
+} else{
+    console.log("It is not a falsy");
 }
 
-function whileFunc(){
-    while(i < 100){
-        i++;
-        console.log(i);
-    }
-}
+const firstName = "Руслан";
+const lastName = "Габуев";
+const work = "разработчик";
+console.log(`Привет! Мое имя ${firstName} ${lastName} и я ${work}`);
 
-function check(num){
-    for(let i = 2; i < num; i++){
-        if(num % i === 0){
-            return false;
-        }
-    }
-    return num !== 1;
-}
+console.log(null === undefined); //выводит false, так как тут происходит строгое сравнение с учетом типов данных. Очевидно, что типы данных здесь разные
+console.log(null == undefined); //выводит true, так как тут происходит нестрогое сравнение, учитывая фактическое значение переменных. Фактически они одинаковы, так как обе переменные пусты, об этом и свидетельтвует нам результат
 
-function print(max){
-    for(let i = 2; i <= max; i++){
-        if(check(i)){
-            console.log(i)
-        }
-    }
-}
-
-print(100)
+const b = 1 + "1";
+console.log(typeof(b));
+console.log(b); //при сочитании числа и строки оба значения конвертируются в строку. Как мне кажется, связанно это с тем, что было бы очень много проблем, если бы при таком сложении строки бы превращались в цифры и все опперации вели юы себя неккоректно, что привело бы к неожиданным результатам
