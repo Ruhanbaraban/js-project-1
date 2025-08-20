@@ -1,21 +1,38 @@
-const message = "JavaScript is fun!";
-console.log(message.includes("fun"));
 
-let a = null;
-if(!a){
-    console.log("It is a falsy");
-} else{
-    console.log("It is not a falsy");
+const num = [1, 2, 3, 4, 5];
+const numbers = num.forEach((number) => {
+    console.log(number * number)});
+
+const num2 = [1, 1, 2, 2, 3, 3, 4, 4, 5, 5]
+const numbers2 = num2.filter((item, pos) => { 
+    return num2.indexOf(item) == pos;
+});
+console.log(numbers2)
+
+const num3 = [1, 2, 3, 4, 5]
+sumNum = num.reduce((lastNum, currentNum) => {
+    return lastNum + currentNum;
+} , 0)
+
+console.log(sumNum);
+
+function reverseArr(array){
+    newArr = [];
+    for(let i = array.length - 1; i > -1; i--){
+        newArr.push(array[i])
+    }
+    return newArr;
 }
+console.log(reverseArr([1, 2, 3, 4, 5]))
 
-const firstName = "Руслан";
-const lastName = "Габуев";
-const work = "разработчик";
-console.log(`Привет! Мое имя ${firstName} ${lastName} и я ${work}`);
+let a = "a";
+const b = "b";
+a = "c";
+console.log(a);
+console.log(b) //В отличие от let, const не переопределяется и выдает ошибку при попытке его переопределить
 
-console.log(null === undefined); //выводит false, так как тут происходит строгое сравнение с учетом типов данных. Очевидно, что типы данных здесь разные
-console.log(null == undefined); //выводит true, так как тут происходит нестрогое сравнение, учитывая фактическое значение переменных. Фактически они одинаковы, так как обе переменные пусты, об этом и свидетельтвует нам результат
-
-const b = 1 + "1";
-console.log(typeof(b));
-console.log(b); //при сочитании числа и строки оба значения конвертируются в строку. Как мне кажется, связанно это с тем, что было бы очень много проблем, если бы при таком сложении строки бы превращались в цифры и все опперации вели юы себя неккоректно, что привело бы к неожиданным результатам
+let letArr = [1, 2, 3];
+const constArr = [1, 2, 3];
+letArr = [1, 2, 3, 4];
+console.log(letArr);
+console.log(constArr) //здесь происходит абсолютно то же самое, что и выше
