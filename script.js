@@ -1,38 +1,72 @@
-
-const num = [1, 2, 3, 4, 5];
-const numbers = num.forEach((number) => {
-    console.log(number * number)});
-
-const num2 = [1, 1, 2, 2, 3, 3, 4, 4, 5, 5]
-const numbers2 = num2.filter((item, pos) => { 
-    return num2.indexOf(item) == pos;
-});
-console.log(numbers2)
-
-const num3 = [1, 2, 3, 4, 5]
-sumNum = num.reduce((lastNum, currentNum) => {
-    return lastNum + currentNum;
-} , 0)
-
-console.log(sumNum);
-
-function reverseArr(array){
-    newArr = [];
-    for(let i = array.length - 1; i > -1; i--){
-        newArr.push(array[i])
+//1
+const string = "потоп";
+function check(str){
+    let lowStr = str.toLowerCase();
+    let array = lowStr.split("")
+    if(array.join("") == array.reverse().join("")){
+        return true;
+    }else{
+        return false;
     }
-    return newArr;
 }
-console.log(reverseArr([1, 2, 3, 4, 5]))
+console.log(check(string))
 
-let a = "a";
-const b = "b";
-a = "c";
-console.log(a);
-console.log(b) //В отличие от let, const не переопределяется и выдает ошибку при попытке его переопределить
+//2 
+const sentence = "Маленька овощечистка ставит меня в тупик";
+function check2(sent){
+    let arraySent = sent.split(" ");
+    let longestWord = arraySent[0];
+    for(let i = 1; i <  arraySent.length; i++){
+        if(longestWord.length < arraySent[i].length){
+            longestWord = arraySent[i];
+        }
+    }
+    return longestWord
+}
+console.log(check2(sentence))
 
-let letArr = [1, 2, 3];
-const constArr = [1, 2, 3];
-letArr = [1, 2, 3, 4];
-console.log(letArr);
-console.log(constArr) //здесь происходит абсолютно то же самое, что и выше
+//3
+const phoneNum = "89284933214";
+function createPhoneNum(phoneNum){
+    const number = phoneNum.split("")
+
+    if(number.length !== 11){
+        return "Не верный формат"
+    }
+
+    return `${number[0]} (${number.slice(1, 4).join("")}) ${number.slice(4, 7).join("")}-${number.slice(7, 10).join("")}`
+}
+console.log(createPhoneNum(phoneNum))
+
+//4
+const numbers = [2, 4, 3, 8, 1]
+function checkNums(nums){
+    let minNum = numbers[0];
+    let maxNum = numbers[0];
+    for(let i = 0; i < nums.length; i++){
+        if(minNum > nums[i]){
+            minNum = nums[i];
+        }
+        if(maxNum < nums[i]){
+            maxNum = nums[i];
+        }
+    }
+    console.log(minNum)
+    console.log(maxNum)
+}
+checkNums(numbers);
+
+//5
+const numbers2 = [1, 4, 2, 3, 5]
+function sort(arr){
+    sortArr = [...arr];
+    for(let i = 0; i < sortArr.length; i++){
+        for(let j = i + 1; j < sortArr.length; j++){
+            if(sortArr[i] > sortArr[j]){
+                [sortArr[i], sortArr[j]] = [sortArr[j], sortArr[i]]
+            }
+        }
+    }
+    return sortArr
+}
+console.log(sort(numbers2))
