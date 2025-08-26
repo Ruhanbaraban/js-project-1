@@ -5,18 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
 </head>
 <body>
     <div class="container">
         <h1 id="header">Викторина</h1>
-        <ul class="questions-wrapper">
-            <li class="question"></li>
-            <li class="question"></li>
-            <li class="question"></li>
-            <li class="question"></li>
-        </ul>
-        <button id="startGame"></button>
-        <button id="restartGame"></button>
+        <div id="questions-box">
+            <h2 id="question">Кто ты?</h2>
+            <ul id="answers-wrapper">
+                <li class="answer">Черт</li>
+                <li class="answer">Псин</li>
+                <li class="answer">Конч</li>
+                <li class="answer">Ты</li>
+            </ul>
+        </div>
+        <button id="startGame">Начнем!</button>
+        <button id="restartGame">Перезапустить игру</button>
     </div>
     <script src="script.js"></script>
 </body>
