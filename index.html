@@ -4,13 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1 id="header">Привет, я Руслан!</h1>
-    <h2 class="forEdit">Я красный</h2>
-    <p id="forDelete">Я удален</p>
-    <a href="https://habr.com/ru/articles/" id="link">Ссылка</a>
-    <div class="forToggle"></div>
+    <div class="container">
+        <h1 id="header">Викторина</h1>
+        <ul class="questions-wrapper">
+            <li class="question"></li>
+            <li class="question"></li>
+            <li class="question"></li>
+            <li class="question"></li>
+        </ul>
+        <button id="startGame"></button>
+        <button id="restartGame"></button>
+    </div>
     <script src="script.js"></script>
 </body>
 </html>
