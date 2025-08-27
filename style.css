@@ -36,10 +36,16 @@ body{
     flex-direction: column;
     align-items: center;
     gap: 20px;
+    display: none;
+}
+
+.container.active #questions-box{
+    display: flex;
 }
 
 .container #questions-box #question{
     font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
 }
 
 .container #questions-box #answers-wrapper{
@@ -83,6 +89,10 @@ body{
     margin: 20px 0 0 0;
 }
 
+.container.active #startGame{
+    display: none;
+}
+
 .container #restartGame{
     padding: 6px 18px;
     border-radius: 6px;
@@ -90,4 +100,9 @@ body{
     font-weight: 600;
     letter-spacing: 1.5px;
     margin: 20px 0 0 0;
+    display: none;
+}
+
+.container.active #restartGame{
+    display: block;
 }
