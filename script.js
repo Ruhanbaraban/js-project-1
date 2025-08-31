@@ -1,72 +1,93 @@
-const container = document.getElementById("container");
-const header = document.getElementById("header");
-const questionsBox = document.getElementById("questions-box");
+//обозначение всех переменных, связанных с DOM
+const topicOfTheme = document.getElementById("topic-of-qwiz");
+const bottomSide = document.getElementById("bottom-side");
+const startButton = document.getElementById("startButton");
 const question = document.getElementById("question");
-const answersWrapper = document.getElementById("answers-wrapper")
+const answersWrapper = document.getElementsByClassName("answers-wrapper");
 const answer = document.getElementsByClassName("answer");
-const startButton = document.getElementById("startGame");
-const restartButton = document.getElementById("restartGame");
+const resultOfAnswer = document.getElementById("resutlValidationAnswer");
+const restartButton = document.getElementById("restartButton");
+
+//обозначение всех переменных, имеющих значение в создании логики
 const questions = [
     {
-        questionNumber: 1,
-        question: "В каком году было крещение Руси?",
-        answers: ["862 год", "1256 год", "301 год", "988 год"],
-        correctAnswer: 4
-
+        question: "В каком году произошла вторая мировая война?",
+        answers: ["1941", "1914", "1939", "1961"],
+        correctAnswer: 2
     },
     {
-        questionNumber: 2,
-        question: "В каком году началась вторая мировая война?",
-        answers: ["1812 год", "1914 год", "1939 год", "1941 год"],
+        question: "В каком году произошло крещение Руси?",
+        answers: ["962", "618", "1102", "988"],
         correctAnswer: 3
     },
     {
-        questionNumber: 3,
-        question: "В каком году распался СССР?",
-        answers: ["1991 год", "1992 год", "1990 год", "1993 год"],
-        correctAnswer: 1
+        question: "В каком году к России присоеденилась Северная Осетия?",
+        answers: ["1774", "1784", "1798", "1801"],
+        correctAnswer: 0
     },
     {
-        questionNumber: 4,
-        question: "в каком году была основана крепость 'Владикавказ'?",
-        answers: ["1774 год", "1809 год", "1735 год", "1784 год"],
-        correctAnswer: 4
+        question: "В каком году в космос впервые был отправлен первый человек?",
+        answers: ["1961", "1969", "1973", "1949"],
+        correctAnswer: 0
     }
-];
-let correctAnswersResult = 0;
-// Фунция, отвечающая за старт игры
+]
+
 let indexOfQuestion = 0;
-let currentQuestion = questions[indexOfQuestion];
-startButton.addEventListener("click", (e) => {
-    container.classList.add("active")
+let currentQuestion = questions[indexOfQuestion]; 
+let correctAnswers = 0;
+
+startButton.addEventListener("click", () => {
+    bottomSide.classList.add("active");
+
+    resultOfAnswer.innerHTML = ``;
+
+    indexOfQuestion = 0;
+    currentQuestion = questions[indexOfQuestion]; 
+    correctAnswers = 0;
+
     question.innerHTML = currentQuestion.question;
-    for(let i = 0; i < 4; i++){
+    for(let i = 0; i < questions.length; i++){
         answer[i].innerHTML = currentQuestion.answers[i];
     }
-    Array.from(answer).forEach((element, index) => {
-    element.addEventListener("click", () => {
-        if(index + 1 === currentQuestion.correctAnswer){
-            alert("Правильно!");
-            correctAnswersResult++
-           } else{
-            alert("Неправильно!")
-        }
-        changeQuestion()
-    });   
-});
 });
 
+Array.from(answer).forEach((element, index) => {
+        element.addEventListener("click", () => {
+            if(index === currentQuestion.correctAnswer){
+                resultOfAnswer.style.color = "green";
+                resultOfAnswer.innerHTML = "Правильно!"; 
+                correctAnswers++;
+            } else {
+                resultOfAnswer.style.color = "red";
+                resultOfAnswer.innerHTML = "Неправильно!";
+            }
+            changeQuestion();
+        });
+    });
+
 function changeQuestion(){
-        indexOfQuestion++
+    indexOfQuestion++;
     if(indexOfQuestion > 3){
-        container.classList.remove("active");
-        alert(`Ты ответил на ${correctAnswersResult}/${questions.length}`)
-        return;
+        bottomSide.classList.remove("active");
+        resultOfAnswer.style.color = "grey";
+        resultOfAnswer.innerHTML = `Ты ответил правильно на ${correctAnswers}/${questions.length}`;
     }
     currentQuestion = questions[indexOfQuestion];
     question.innerHTML = currentQuestion.question;
-    for(let i = 0; i < 4; i++){
+    for(let i = 0; i < questions.length; i++){
         answer[i].innerHTML = currentQuestion.answers[i];
     }
 }
 
+restartButton.addEventListener("click", () => {
+    resultOfAnswer.innerHTML = ``;
+
+    indexOfQuestion = 0;
+    currentQuestion = questions[indexOfQuestion]; 
+    correctAnswers = 0;
+
+    question.innerHTML = currentQuestion.question;
+    for(let i = 0; i < questions.length; i++){
+        answer[i].innerHTML = currentQuestion.answers[i];
+    }
+});
