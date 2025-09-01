@@ -56,6 +56,27 @@ body{
     flex-direction: column;
     gap: 20px;
     padding: 20px;
+    position: relative;
+}
+
+.container .game-wrapper #bottom-side #timer{
+    width: 30px;
+    height: 30px;
+    border: 2px solid;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: auto;
+    font-family: Manrope;
+    display: none;
+}
+
+.container .game-wrapper #bottom-side.active #timer{
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    display: flex;
 }
 
 .container .game-wrapper #bottom-side #startButton{
@@ -149,6 +170,23 @@ body{
 
 .container .game-wrapper #bottom-side #qwiz-box .answers-wrapper .answer:empty{
     display: none;
+}
+
+.container .game-wrapper #bottom-side #nextQuestion{
+    padding: 6px 14px;
+    border-radius: 5px;
+    margin: 10px 0 0 0;
+    text-align: center;
+    font-family: "Manrope", sans-serif;
+    background: linear-gradient(120deg, #4d3664, #bab5f6);
+    border: none;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    display: none;
+}
+
+.container .game-wrapper #bottom-side #nextQuestion:hover{
+    transform: scale(1.05);
+    transition: .5s;
 }
 
 .container .game-wrapper #bottom-side #resutlValidationAnswer{
