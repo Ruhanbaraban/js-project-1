@@ -1,15 +1,18 @@
-//обозначение всех переменных, связанных с DOM
+//Обозначение всех переменных, связанных с DOM
 const topicOfTheme = document.getElementById("topic-of-qwiz");
 const bottomSide = document.getElementById("bottom-side");
+const qwizBox = document.getElementById("qwiz-box");
 const timer = document.getElementById("timer");
 const startButton = document.getElementById("startButton");
 const question = document.getElementById("question");
 const answersWrapper = document.getElementsByClassName("answers-wrapper");
 const answer = document.getElementsByClassName("answer");
+const inputAnswer = document.getElementById("input-answer");
+const nextQuestion = document.getElementById("nextQuestion");
 const resultOfAnswer = document.getElementById("resutlValidationAnswer");
 const restartButton = document.getElementById("restartButton");
 
-//обозначение всех переменных, имеющих значение в создании логики
+//Обозначение всех переменных, имеющих значение в создании логики
 const questions = [
     {
         question: "В каком году произошла вторая мировая война?",
@@ -32,26 +35,44 @@ const questions = [
         correctAnswer: 0
     },
     {
-        question: "Когда призошла 'Бородинское Сражение'",
+        question: "Когда призошло 'Бородинское Сражение'",
         answers: ["1821", "1812", "1719", "1802"],
         correctAnswer: 1
+    }
+]
+const inputQuestions = [
+    {
+        question: "Как звали основателя Киевской Руси",
+        correctAnswer: "Рюрик"
+    },
+    {
+        question: "Какова фамилия главенствующего лицо партии 'Большевики'?",
+        correctAnswer: "Ленин"
+    },
+    {
+        question: "Имя и прозвище правителя Руси, который ",
+        correctAnswer: "Ленин"
     }
 ]
 
 let indexOfQuestion = 0;
 let currentQuestion = questions[indexOfQuestion]; 
+let indexOfInputQuestion = 0;
+let currentInputQuestion = inputQuestions[indexOfInputQuestion];
 let correctAnswers = 0;
 let timerValue = 10;
-let timerInterval = null;
+let timerInterval;
 
-//отображение первого вопроса с вариантами ответа и начало викторины
+//Отображение первого вопроса с вариантами ответа и начало викторины
 startButton.addEventListener("click", () => {
+    qwizBox.classList.remove("inputActive");
     bottomSide.classList.add("active");
 
     resultOfAnswer.innerHTML = ``;
-    clearInterval(timerInterval)
-    startTimer()
+    startTimer(changeQuestion);
 
+    indexOfInputQuestion = 0;
+    currentInputQuestion = inputQuestions[indexOfInputQuestion];
     indexOfQuestion = 0;
     currentQuestion = questions[indexOfQuestion]; 
     correctAnswers = 0;
@@ -62,7 +83,7 @@ startButton.addEventListener("click", () => {
     }
 });
 
-//логика выбора ответа и проверки правильности с перенаправлением на функцию смены вопроса
+//Логика выбора ответа и проверки правильности с перенаправлением на функцию смены вопроса
 Array.from(answer).forEach((element, index) => {
         element.addEventListener("click", () => {
             if(index === currentQuestion.correctAnswer){
@@ -73,18 +94,16 @@ Array.from(answer).forEach((element, index) => {
                 resultOfAnswer.style.color = "red";
                 resultOfAnswer.innerHTML = "Неправильно!";
             }
-            timerValue = 10;
             changeQuestion();
         });
     });
 
-//логика отображения нового вопроса после валидации предыдущего
+//Логика отображения нового вопроса после валидации предыдущего
 function changeQuestion(){
     indexOfQuestion++;
+    timerValue = 10;
     if(indexOfQuestion >= questions.length){
-        bottomSide.classList.remove("active");
-        resultOfAnswer.style.color = "grey";
-        resultOfAnswer.innerHTML = `Ты ответил правильно на ${correctAnswers}/${questions.length}`;
+        startQuestionsWithInput();
     }
     currentQuestion = questions[indexOfQuestion];
     question.innerHTML = currentQuestion.question;
@@ -93,10 +112,12 @@ function changeQuestion(){
     }
 }
 
-//функция перезапуска игры
+//Функция перезапуска игры
 restartButton.addEventListener("click", () => {
     resultOfAnswer.innerHTML = ``;
 
+    indexOfInputQuestion = 0;
+    currentInputQuestion = inputQuestions[indexOfInputQuestion];
     indexOfQuestion = 0;
     currentQuestion = questions[indexOfQuestion]; 
     correctAnswers = 0;
@@ -106,18 +127,53 @@ restartButton.addEventListener("click", () => {
     for(let i = 0; i < currentQuestion.answers.length; i++){
         answer[i].innerHTML = currentQuestion.answers[i];
     }
+    qwizBox.classList.remove("inputActive");
 });
 
-//функция, запускающая таймер
-function startTimer(){
+//Начало отображения вопросов с ответом в видео поля ввода
+function startQuestionsWithInput(){
+    qwizBox.classList.add("inputActive");
+    question.innerHTML = currentInputQuestion.question;
+    startTimer(changeInputQuestion);
+}
+
+//Логика нажатия на кнопку для валидации и перенаправления на функцию смены вопроса
+nextQuestion.addEventListener("click", () => {
+    if(inputAnswer.value.toLowerCase() === currentInputQuestion.correctAnswer.toLowerCase()){
+        resultOfAnswer.innerHTML = "Правильно!";
+        resultOfAnswer.style.color = "green";
+        correctAnswers++;
+    } else{
+        resultOfAnswer.innerHTML = "Неправильно!";
+        resultOfAnswer.style.color = "red";
+    }
+    changeInputQuestion();
+});
+
+function changeInputQuestion(){
+    indexOfInputQuestion++;
+    timerValue = 10;
+    if(indexOfInputQuestion === inputQuestions.length){
+        resultOfAnswer.style.color = "grey";
+        bottomSide.classList.remove("active");
+        resultOfAnswer.innerHTML = `Ты ответил правильно на ${correctAnswers}/${questions.length + inputQuestions.length}`;
+        clearInterval(timerInterval)
+    }
+    currentInputQuestion = inputQuestions[indexOfInputQuestion];
+    inputAnswer.value = "";
+    question.innerHTML = currentInputQuestion.question;
+}
+
+function startTimer(e){
+    clearInterval(timerInterval);
+    timerValue = 10;
     timerInterval = setInterval(() => {
         timer.innerHTML = timerValue;
-        timerValue--
+        timerValue--;
         if(timerValue < 0){
-            resultOfAnswer.innerHTML = "Время вышло"
+            resultOfAnswer.innerHTML = "Время вышло!";
             resultOfAnswer.style.color = "red";
-            timerValue = 10;
-            changeQuestion()
+            e();
         }
     }, 1000);
 }

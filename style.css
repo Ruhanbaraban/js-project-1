@@ -150,6 +150,10 @@ body{
     width: 100%;
 }
 
+.container .game-wrapper #bottom-side #qwiz-box.inputActive .answers-wrapper{
+    display: none;
+}
+
 .container .game-wrapper #bottom-side #qwiz-box .answers-wrapper .answer{
     font-family: "Manrope", sans-serif;
     max-width: 150px;
@@ -172,7 +176,27 @@ body{
     display: none;
 }
 
-.container .game-wrapper #bottom-side #nextQuestion{
+.container .game-wrapper #bottom-side #qwiz-box #input-answer-box{
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+    display: none;
+}
+
+.container .game-wrapper #bottom-side #qwiz-box.inputActive #input-answer-box{
+    display: flex;
+}
+
+.container .game-wrapper #bottom-side #qwiz-box #input-answer-box #input-answer{
+    padding: 0px 20px 10px 0px;
+    font-family: Manrope;
+    font-weight: 500;
+    outline: none;
+    border: none;
+    border-bottom: 1px solid #333333;
+}
+
+.container .game-wrapper #bottom-side #qwiz-box #input-answer-box #nextQuestion{
     padding: 6px 14px;
     border-radius: 5px;
     margin: 10px 0 0 0;
@@ -181,7 +205,6 @@ body{
     background: linear-gradient(120deg, #4d3664, #bab5f6);
     border: none;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-    display: none;
 }
 
 .container .game-wrapper #bottom-side #nextQuestion:hover{
