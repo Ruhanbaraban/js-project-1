@@ -71,16 +71,15 @@ startButton.addEventListener("click", () => {
     resultOfAnswer.innerHTML = ``;
     startTimer(changeQuestion);
 
-    indexOfInputQuestion = 0;
-    currentInputQuestion = inputQuestions[indexOfInputQuestion];
     indexOfQuestion = 0;
     currentQuestion = questions[indexOfQuestion]; 
+    indexOfInputQuestion = 0;
+    currentInputQuestion = inputQuestions[indexOfInputQuestion];
     correctAnswers = 0;
+    timerValue = 10;
+    timerInterval;
 
-    question.innerHTML = currentQuestion.question;
-    for(let i = 0; i < currentQuestion.answers.length; i++){
-        answer[i].innerHTML = currentQuestion.answers[i];
-    }
+    fillingOutQuestions()
 });
 
 //Логика выбора ответа и проверки правильности с перенаправлением на функцию смены вопроса
@@ -106,10 +105,7 @@ function changeQuestion(){
         startQuestionsWithInput();
     }
     currentQuestion = questions[indexOfQuestion];
-    question.innerHTML = currentQuestion.question;
-    for(let i = 0; i < currentQuestion.answers.length; i++){
-        answer[i].innerHTML = currentQuestion.answers[i];
-    }
+    fillingOutQuestions()
 }
 
 //Функция перезапуска игры
@@ -123,12 +119,16 @@ restartButton.addEventListener("click", () => {
     correctAnswers = 0;
     timerValue = 10;
 
+    fillingOutQuestions()
+    qwizBox.classList.remove("inputActive");
+});
+
+function fillingOutQuestions(){
     question.innerHTML = currentQuestion.question;
     for(let i = 0; i < currentQuestion.answers.length; i++){
         answer[i].innerHTML = currentQuestion.answers[i];
     }
-    qwizBox.classList.remove("inputActive");
-});
+}
 
 //Начало отображения вопросов с ответом в видео поля ввода
 function startQuestionsWithInput(){
