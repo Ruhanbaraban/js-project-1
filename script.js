@@ -52,6 +52,14 @@ const inputQuestions = [
     {
         question: "Система распределения власти, созданная Иваном Грозным, называлась...",
         correctAnswer: "Опричнина"
+    },
+    {
+        question: "Каков год конца первой мировой войны?",
+        correctAnswer: "1918"
+    },
+    {
+        question: "При каком правителе РИ произошло Пугачевское восстание?",
+        correctAnswer: "Екатерина 2"
     }
 ]
 
@@ -164,7 +172,7 @@ function changeInputQuestion(){
     question.innerHTML = currentInputQuestion.question;
 }
 
-function startTimer(e){
+function startTimer(functionName){
     clearInterval(timerInterval);
     timerValue = 10;
     timerInterval = setInterval(() => {
@@ -173,7 +181,7 @@ function startTimer(e){
         if(timerValue < 0){
             resultOfAnswer.innerHTML = "Время вышло!";
             resultOfAnswer.style.color = "red";
-            e();
+            functionName();
         }
     }, 1000);
 }
